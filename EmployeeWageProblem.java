@@ -2,6 +2,37 @@ package OOPS;
 
 import java.util.Scanner;
 
+class CompanyEmpWage{
+    String companyName;
+    int workingDays;
+    float wage;
+    CompanyEmpWage(String companyName, int workingDays, float wage){
+        this.companyName = companyName;
+        this.workingDays = workingDays;
+        this.wage = wage;
+    }
+    static void totalCompanyWage(CompanyEmpWage[] emp){
+        float qkWages=0;
+        float bzaWages=0;
+        float wiproWages=0;
+        for(CompanyEmpWage e : emp){
+            switch(e.companyName){
+                case "QK" : qkWages += e.wage;
+                            break;
+                case "BZA" : bzaWages += e.wage;
+                             break;
+                case "WIPRO" : wiproWages += e.wage;
+                               break;
+            }
+        }
+        System.out.println("QK company expenditure "+qkWages);
+        System.out.println("BZA company expenditure "+bzaWages);
+        System.out.println("WIPRO company expenditure "+wiproWages);
+
+    }
+
+}
+
 class Employee{
     String companyName;
     boolean isPresent;
@@ -106,64 +137,76 @@ class EmpWageUseCases{
 public class EmployeeWageProblem {
     public static void main(String[] args) {
         //usecase 1
-        if(EmpWageUseCases.empAttendance()){
-            System.out.println("Employee was present today");
-        }else{
-            System.out.println("Employee was absent today");
-        }
+//        if(EmpWageUseCases.empAttendance()){
+//            System.out.println("Employee was present today");
+//        }else{
+//            System.out.println("Employee was absent today");
+//        }
 
         //usecase2
-        float dailyWage = EmpWageUseCases.calcuateSalary(8,20.0f);
-        if(dailyWage > 0){
-            System.out.println("Since employee was present today his daily wage was "+dailyWage+" Rs.");
-        }else {
-            System.out.println("Since employee was absent today his daily wage was 0 Rs.");
-        }
+//        float dailyWage = EmpWageUseCases.calcuateSalary(8,20.0f);
+//        if(dailyWage > 0){
+//            System.out.println("Since employee was present today his daily wage was "+dailyWage+" Rs.");
+//        }else {
+//            System.out.println("Since employee was absent today his daily wage was 0 Rs.");
+//        }
 
         //usecase3
-        Employee qk1 = new Employee(true,20,false);
-        float partTimeSal = EmpWageUseCases.calculateSalary(qk1);
-        System.out.println("Salary of Part time employee is Rs. "+partTimeSal);
+//        Employee qk1 = new Employee(true,20,false);
+//        float partTimeSal = EmpWageUseCases.calculateSalary(qk1);
+//        System.out.println("Salary of Part time employee is Rs. "+partTimeSal);
 
         //usecase4
-        System.out.println("Enter\n1 if Employee is FullTime\n2 if Employee is Part Time");
+//        System.out.println("Enter\n1 if Employee is FullTime\n2 if Employee is Part Time");
         Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
-        EmpWageUseCases.calculateSalarySwitchCase(choice);
+//        int choice = sc.nextInt();
+//        EmpWageUseCases.calculateSalarySwitchCase(choice);
 
         //usecase5
-        boolean isFullTime = false;
-        System.out.println("Enter no. of days you were present in last month");
-        int presentDays = sc.nextInt();
-        System.out.println("Enter 1 if you are full time and 2 if u are part time");
-        int fullTimeInput = sc.nextInt();
-        if(fullTimeInput == 1){
-            isFullTime = true;
-        }
-        Employee qk2 = new Employee(true,20,isFullTime);
-        EmpWageUseCases.calculateMonthlyWage(qk2,presentDays);
+//        boolean isFullTime = false;
+//        System.out.println("Enter no. of days you were present in last month");
+//        int presentDays = sc.nextInt();
+//        System.out.println("Enter 1 if you are full time and 2 if u are part time");
+//        int fullTimeInput = sc.nextInt();
+//        if(fullTimeInput == 1){
+//            isFullTime = true;
+//        }
+//        Employee qk2 = new Employee(true,20,isFullTime);
+//        EmpWageUseCases.calculateMonthlyWage(qk2,presentDays);
 
         //usecase6
-        System.out.println("Enter true if you are full time");
-        isFullTime = sc.nextBoolean();
-        System.out.println("Enter number of days you have been present in this month till now");
-        int conditionPresentDays = sc.nextInt();
-        Employee qk3 = new Employee(true,20,isFullTime);
-        EmpWageUseCases.calculateWageConditionally(qk3,conditionPresentDays);
+//        System.out.println("Enter true if you are full time");
+//        isFullTime = sc.nextBoolean();
+//        System.out.println("Enter number of days you have been present in this month till now");
+//        int conditionPresentDays = sc.nextInt();
+//        Employee qk3 = new Employee(true,20,isFullTime);
+//        EmpWageUseCases.calculateWageConditionally(qk3,conditionPresentDays);
 
         //usecase7
         //already implemented code in required format
 
         //usecase8
-        Employee qk4 = new Employee("QK",15000,22,true);
-        Employee qk5 = new Employee("BZA",12000,24,true);
-        System.out.println("Enter number of days you have been present this month");
-        int days = sc.nextInt();
-        qk4.setWorkingHoursPerDay();
-        float sal = EmpWageUseCases.calculateWageCompanyWise(qk4,days);
-        System.out.println("Salary of QK Employee for working "+days+" days is Rs. "+sal);
-        qk5.setWorkingHoursPerDay();
-        sal = EmpWageUseCases.calculateWageCompanyWise(qk5,days);
-        System.out.println("Salary of BZA Employee for working "+days+" days is Rs. "+sal);
+//        Employee qk4 = new Employee("QK",15000,22,true);
+//        Employee qk5 = new Employee("BZA",12000,24,true);
+//        System.out.println("Enter number of days you have been present this month");
+//        int days = sc.nextInt();
+//        qk4.setWorkingHoursPerDay();
+//        float sal = EmpWageUseCases.calculateWageCompanyWise(qk4,days);
+//        System.out.println("Salary of QK Employee for working "+days+" days is Rs. "+sal);
+//        qk5.setWorkingHoursPerDay();
+//        sal = EmpWageUseCases.calculateWageCompanyWise(qk5,days);
+//        System.out.println("Salary of BZA Employee for working "+days+" days is Rs. "+sal);
+
+        //usecase9 and usecase10
+        CompanyEmpWage emp1 = new CompanyEmpWage("QK",22,20000);
+        CompanyEmpWage emp2 = new CompanyEmpWage("BZA",25,30000);
+        CompanyEmpWage emp3 = new CompanyEmpWage("WIPRO",28,26000);
+        CompanyEmpWage emp4 = new CompanyEmpWage("QK",22,20000);
+        CompanyEmpWage[] emp = new CompanyEmpWage[4];
+        emp[0]=emp1;
+        emp[1]=emp2;
+        emp[2]=emp3;
+        emp[3]=emp4;
+        CompanyEmpWage.totalCompanyWage(emp);
     }
 }
