@@ -3,7 +3,10 @@ package OOPS;
 import java.util.Scanner;
 
 class Employee{
+    String companyName;
     boolean isPresent;
+    static int workingHoursPerDay;
+    int workingDays;
     float wage;
     boolean isFullTime;
 
@@ -11,6 +14,21 @@ class Employee{
         this.isPresent = isPresent;
         this.wage = wage;
         this.isFullTime = isFullTime;
+    }
+
+    Employee(String companyName , float wage , int workingDays , boolean isFullTime){
+        this.companyName = companyName;
+        this.wage = wage;
+        this.workingDays = workingDays;
+        this.isFullTime = isFullTime;
+    }
+
+    void setWorkingHoursPerDay(){
+        if(companyName.equals("qk")){
+            workingHoursPerDay = 8;
+        }else{
+            workingHoursPerDay = 6;
+        }
     }
 }
 
@@ -80,6 +98,9 @@ class EmpWageUseCases{
         }
 
     }
+    static float calculateWageCompanyWise(Employee obj , int days){
+        return (days*obj.wage)/ obj.workingDays;
+    }
 }
 
 public class EmployeeWageProblem {
@@ -131,9 +152,18 @@ public class EmployeeWageProblem {
         EmpWageUseCases.calculateWageConditionally(qk3,conditionPresentDays);
 
         //usecase7
-        //alrady implemented code in required format
+        //already implemented code in required format
 
         //usecase8
-
+        Employee qk4 = new Employee("QK",15000,22,true);
+        Employee qk5 = new Employee("BZA",12000,24,true);
+        System.out.println("Enter number of days you have been present this month");
+        int days = sc.nextInt();
+        qk4.setWorkingHoursPerDay();
+        float sal = EmpWageUseCases.calculateWageCompanyWise(qk4,days);
+        System.out.println("Salary of QK Employee for working "+days+" days is Rs. "+sal);
+        qk5.setWorkingHoursPerDay();
+        sal = EmpWageUseCases.calculateWageCompanyWise(qk5,days);
+        System.out.println("Salary of BZA Employee for working "+days+" days is Rs. "+sal);
     }
 }
