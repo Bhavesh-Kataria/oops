@@ -2,132 +2,97 @@ package OOPS;
 
 import java.util.Scanner;
 
-class EmployeeAttendanceUC1{
-     boolean checkAttendance(){
-        int isPresent = (int) Math.round(Math.random());
-         return isPresent == 1;
+class Employee{
+    boolean isPresent;
+    float wage;
+    boolean isFullTime;
+
+    Employee(boolean isPresent,float wage,boolean isFullTime){
+        this.isPresent = isPresent;
+        this.wage = wage;
+        this.isFullTime = isFullTime;
     }
 }
 
-class EmployeeWageUC2{
-    int WORKING_HOURS = 8;
-    int WAGE_PER_HOUR = 20;
-    int calculateSalary(){
-        EmployeeAttendanceUC1 emp = new EmployeeAttendanceUC1();
-        if(emp.checkAttendance()){
-            return WORKING_HOURS*WAGE_PER_HOUR;
-        }else{
-            return 0;
+class EmpWageUseCases{
+    static boolean empAttendance(){
+        int isPresent = (int)Math.round(Math.random());
+        return isPresent == 1 ;
+    }
+    static float calcuateSalary(int workingHours , float wage){
+        if(empAttendance()){
+            return workingHours * wage;
         }
+        return 0;
     }
-}
-
-class EmployeeWageUC3{
-    int WORKING_HOURS = 8;
-    int WAGE_PER_HOUR = 20;
-    int PART_TIME_HOURS = 4;
-    int calculateSalary(){
-        Scanner sc = new Scanner((System.in));
-        EmployeeAttendanceUC1 emp = new EmployeeAttendanceUC1();
-        if(emp.checkAttendance()) {
-            System.out.printf("Are you working full time or part time today %n1.Full time%n2.Half time");
-            int durationChecker = sc.nextInt();
-            if (durationChecker == 1) {
-                return WORKING_HOURS * WAGE_PER_HOUR;
-            } else {
-                return PART_TIME_HOURS * WAGE_PER_HOUR;
+    static  float calculateSalary(Employee obj){
+        if(obj.isPresent){
+            if(obj.isFullTime){
+                return obj.wage * 8;
+            }else{
+                return obj.wage * 4;
             }
         }
         return 0;
     }
-}
-
-class EmployeeWageUC4{
-    int WORKING_HOURS = 8;
-    int WAGE_PER_HOUR = 20;
-    int PART_TIME_HOURS = 4;
-    void calculateSalary(){
-        Scanner sc = new Scanner(System.in);
-        System.out.printf("Are you working full time or part time today %n1.Full time%n2.Half time%n3.Leave%n");
-        int yourAttendance = sc.nextInt();
-        switch (yourAttendance){
-            case 1:
-                System.out.println("daily wage is "+WORKING_HOURS*WAGE_PER_HOUR);
-                break;
-            case 2 :
-                System.out.println("half day wage is "+PART_TIME_HOURS*WAGE_PER_HOUR);
-                break;
-            case 3 :
-                System.out.println("since on leave wage is 0 Rs .");
-                break;
+    static void calculateSalarySwitchCase(int choice){
+        switch (choice){
+                case 0:
+                    System.out.println("daily wage is "+0);
+                    break;
+                case 1 :
+                    System.out.println("full time day wage is "+8*20);
+                    break;
+                case 3 :
+                    System.out.println("part time dail wage is "+4*20);
+                    break;
+            }
+    }
+    static void calculateMonthlyWage(Employee obj,int days){
+        if(days<30){
+            if(obj.isFullTime){
+                System.out.println("Your monthly salary is "+obj.wage*8*days);
+            }else{
+                System.out.println("Your monthly salary is "+obj.wage*4*days);
+            }
+        }
+        else{
+            System.out.println("No of present days cannot be more than 30");
         }
     }
-}
-
-class EmployeeWageUC5{
-    int WORKING_DAYS = 20;
-    void getMonthlyWages(){
-        int numOfPresentDays=0;
-        for(int i=1;i<=WORKING_DAYS;i++){
-            int presentCheck = (int) Math.round(Math.random());
-            if(presentCheck==1){
-                numOfPresentDays ++;
+    static void calculateWageConditionally(Employee obj,int presentDays){
+        int targetHours = 100;
+        int targetDays = 20;
+        if(obj.isFullTime){
+            if (presentDays<targetDays && presentDays*8<targetHours){
+                System.out.println("No condition met yet");
             }
-        }
-        System.out.printf("Salary for %d present days in month is %d",numOfPresentDays,numOfPresentDays*20);
-    }
-}
-
-class EmployeeWageUC6{
-    int TARGET_WORKING_HOURS = 100;
-    int TARGET_WORKING_DAYS = 20;
-    void targetWageCalculate(){
-        int dayCount =0;
-        int hourCount =0;
-        int flag =0;
-        for(int i=1;i<=30;i++){
-            if(hourCount==TARGET_WORKING_HOURS){
-                break;
+            else{
+                System.out.println("100 Hours target reached");
             }
-            if(dayCount == TARGET_WORKING_DAYS){
-                flag = 1;
-                break;
-            }
-            int isPresentCheck = (int) Math.round(Math.random());
-            if(isPresentCheck==1){
-                int isHalfDayCheck = (int) Math.round(Math.random());
-                if(isHalfDayCheck == 0){
-                    hourCount += 4;
-                }else{
-                    dayCount +=1;
-                    hourCount += 8;
-                }
-            }
-        }
-        System.out.printf("Employee was present for %d days and %d hours%n",dayCount,hourCount);
-        if(flag == 0){
-            System.out.println("wage for month was "+hourCount*20);
         }else{
-            System.out.println("wage for montth was "+dayCount*8*20);
+            if (presentDays<targetDays && presentDays*4<targetHours){
+                System.out.println("No condition met yet");
+            }
+            else{
+                System.out.println("20 Day Target reached");
+            }
         }
+
     }
-
-
 }
 
 public class EmployeeWageProblem {
     public static void main(String[] args) {
         //usecase 1
-        EmployeeAttendanceUC1 emp = new EmployeeAttendanceUC1();
-        if(emp.checkAttendance()){
+        if(EmpWageUseCases.empAttendance()){
             System.out.println("Employee was present today");
         }else{
             System.out.println("Employee was absent today");
         }
 
         //usecase2
-        EmployeeWageUC2 emp2 = new EmployeeWageUC2();
-        int dailyWage = emp2.calculateSalary();
+        float dailyWage = EmpWageUseCases.calcuateSalary(8,20.0f);
         if(dailyWage > 0){
             System.out.println("Since employee was present today his daily wage was "+dailyWage+" Rs.");
         }else {
@@ -135,24 +100,40 @@ public class EmployeeWageProblem {
         }
 
         //usecase3
-        EmployeeWageUC3 emp3 = new EmployeeWageUC3();
-        int dailyWageUC3 = emp3.calculateSalary();
-        if(dailyWageUC3 > 0){
-            System.out.println("daily wage was "+dailyWageUC3+" Rs.");
-        }else {
-            System.out.println("Since employee was absent today his daily wage was 0 Rs.");
-        }
+        Employee qk1 = new Employee(true,20,false);
+        float partTimeSal = EmpWageUseCases.calculateSalary(qk1);
+        System.out.println("Salary of Part time employee is Rs. "+partTimeSal);
 
         //usecase4
-        EmployeeWageUC4 emp4 = new EmployeeWageUC4();
-        emp4.calculateSalary();
+        System.out.println("Enter\n1 if Employee is FullTime\n2 if Employee is Part Time");
+        Scanner sc = new Scanner(System.in);
+        int choice = sc.nextInt();
+        EmpWageUseCases.calculateSalarySwitchCase(choice);
 
         //usecase5
-        EmployeeWageUC5 emp5 = new EmployeeWageUC5();
-        emp5.getMonthlyWages();
+        boolean isFullTime = false;
+        System.out.println("Enter no. of days you were present in last month");
+        int presentDays = sc.nextInt();
+        System.out.println("Enter 1 if you are full time and 2 if u are part time");
+        int fullTimeInput = sc.nextInt();
+        if(fullTimeInput == 1){
+            isFullTime = true;
+        }
+        Employee qk2 = new Employee(true,20,isFullTime);
+        EmpWageUseCases.calculateMonthlyWage(qk2,presentDays);
 
         //usecase6
-        EmployeeWageUC6 emp6 = new EmployeeWageUC6();
-        emp6.targetWageCalculate();
+        System.out.println("Enter true if you are full time");
+        isFullTime = sc.nextBoolean();
+        System.out.println("Enter number of days you have been present in this month till now");
+        int conditionPresentDays = sc.nextInt();
+        Employee qk3 = new Employee(true,20,isFullTime);
+        EmpWageUseCases.calculateWageConditionally(qk3,conditionPresentDays);
+
+        //usecase7
+        //alrady implemented code in required format
+
+        //usecase8
+
     }
 }
